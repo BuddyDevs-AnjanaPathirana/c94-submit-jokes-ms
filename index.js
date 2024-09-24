@@ -11,10 +11,14 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose
-    .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true, // Enable SSL
+    tlsAllowInvalidCertificates: true, // Allow invalid certificates
+})
     .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch((error) => console.log('MongoDB connection error:', error));
+    .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
 app.use('/jokes', require('./routes/jokes'));
