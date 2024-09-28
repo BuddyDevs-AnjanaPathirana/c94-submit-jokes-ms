@@ -9,6 +9,10 @@ const jokeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: String,
+        default: 'pending'  // 'pending', 'approved', 'rejected'
+    },
     createdAt: {
         type: Date,
         default: Date.now,
